@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spinderman3", "Spinderman3\Spinderman3.csproj", "{C85E66D6-0FCB-4B9A-8351-EFC42B2BC577}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C85E66D6-0FCB-4B9A-8351-EFC42B2BC577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C85E66D6-0FCB-4B9A-8351-EFC42B2BC577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C85E66D6-0FCB-4B9A-8351-EFC42B2BC577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C85E66D6-0FCB-4B9A-8351-EFC42B2BC577}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CC98530F-B2B7-4DAC-BEE2-E4A58F97F536}
+	EndGlobalSection
+EndGlobal
