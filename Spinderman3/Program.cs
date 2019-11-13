@@ -37,15 +37,22 @@ namespace Spinderman3
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Main();
             }
+            catch (NotSupportedException)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"The format \"{file}\" is not supported. Please try again.");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Main();
+            }
             
             Console.Write("Prefered name of the .spindermaan file [filif.spindermaan]:" );
             var oname = Console.ReadLine();
             string name = "";
 
             if (oname == "" || string.IsNullOrEmpty(oname))
-                name = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}" + @"\filif.spindermaan";
+                name = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}" + @"\filif.spindermaan.txt";
             else
-                name = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}" + @"\" + oname + ".spindermaan";
+                name = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}" + @"\" + oname + ".spindermaan.txt";
 
            
 
