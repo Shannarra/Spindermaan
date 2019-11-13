@@ -10,7 +10,7 @@ namespace Spinderman3
         {
             StringCollection collection = new StringCollection();
             
-            foreach (var word in content.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var word in content.Split(new char[] { ' ', '.', ',', '!' }, StringSplitOptions.RemoveEmptyEntries))
                     collection.Add(word);
 
             return collection;
@@ -22,13 +22,17 @@ namespace Spinderman3
             {
                 byte[] rno = new byte[5];
                 rg.GetBytes(rno);
-                return BitConverter.ToInt32(rno, 0) / 10000;
+                string s = BitConverter.ToInt32(rno, 0).ToString();
+                if (s[0] != '-')
+                    return int.Parse(s[0].ToString());
+                return int.Parse(s[1].ToString());
             }
         }
 
-        internal static void Run(StringCollection collection)
+        internal static void Run(StringCollection collection, string nameToSave)
         {
-            
+            string content = "";
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(content);
 
             for (int line = 0; line < collection.Count; line++)
             {
@@ -38,13 +42,25 @@ namespace Spinderman3
                 {
                     var word = item;
 
-                    if (word.Length == 2)
+                    Spindo(ref word);
+
+                    if (word.Length == 2 && Random() > 5)
                         word = $"{word[1]}{word[0]}";
                     else
                     {
+                        int chance = Random();
+
                         if (word.Length <= 5 && word.Length >= 3)
-                            if (Random() < 5)
-                                word = $"{word[1]}{word[0]}" + word.Substring(1, word.Length- 1);
+                        {
+                            if (chance > 5)
+                                word = $"{word[1]}{word[0]}" + word.Substring(1, word.Length - 1);
+                        }
+                        else
+                        {
+                            if ((word.Length - 1) - chance > 1)
+                                word = $"{word.Substring(0, (word.Length - 1) - chance)}" +
+                                   $"{word[word.Length - chance]}{word[(word.Length - 1) - chance]}{word.Substring((word.Length - chance) + 1)}";
+                        }
                     }
                     
                     if (wordIndex == GetWords(collection[line]).Count) //end of sentence
@@ -55,9 +71,34 @@ namespace Spinderman3
                     wordIndex++;
                     sline += $"{word} ";
                 }
-                Console.WriteLine(sline); // print the modified line
+                builder.Append(sline + "\n"); // add the modified line
             }
+
+            using (System.IO.StreamWriter writer = new System.IO.StreamWriter(nameToSave))
+                writer.WriteLine(builder.ToString());
         }
 
+        static void Spindo(ref string word)
+        {
+            string newWord = "";
+
+            foreach (char ch in word)
+            {
+                if (ch == 'в' && Random() < 4)
+                    newWord += 'ж';
+                else if (ch == 'м' && Random() > 4)
+                    newWord += 'н';
+                else if (ch == 'к' && Random() > 7)
+                    newWord += 'г';
+                else if (ch == 'е' && Random() > 6)
+                    newWord += 'и';
+                else if (ch == 'б' && Random() > 6)
+                    newWord += 'п';
+                else 
+                    newWord += ch;
+            }
+
+            word = newWord;
+        }
     }
 }
